@@ -246,21 +246,21 @@ plot_null_reject_df
 ```
 
 ```{r}
-null_reject_data <- sim_mu |>
+null_reject_data = sim_mu |>
   filter(p.value < 0.05) |>
   group_by(mu) |>
   summarise(avg_mean = mean(estimate)) |>
   mutate(plot_type = "null_reject")
 
-avg_mean_data <- sim_mu |>
+avg_mean_data = sim_mu |>
   group_by(mu) |>
   summarise(avg_mean = mean(estimate)) |>
   mutate(plot_type = "avg_mean")
 
 # Combine the data
-combined_data <- rbind(null_reject_data, avg_mean_data)
+combined_data = rbind(null_reject_data, avg_mean_data)
 
-combined_plot <- ggplot(combined_data, aes(x = mu, y = avg_mean, color = plot_type)) +
+combined_plot = ggplot(combined_data, aes(x = mu, y = avg_mean, color = plot_type)) +
   geom_point() +
   geom_line(aes(group = plot_type)) +
   labs(
